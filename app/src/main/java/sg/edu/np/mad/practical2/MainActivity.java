@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,25 +13,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        TextView txt = findViewById(R.id.follow);
-        txt.setOnClickListener(new View.OnClickListener() {
+        User user = new User("John", "Test", 1, true);
+        Button followBtn = findViewById(R.id.follow);
+        followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean followed;
-                String status = txt.getText().toString();
-                if (status == "Follow"){
-                    followed = false;
+                if (user.Followed){
+                    followBtn.setText("Unfollow");
+                    user.Followed = false;
                 }
                 else{
-                    followed = true;
-                }
-                if (!followed){
-                    txt.setText("Unfollow");
-                }
-                else{
-                    txt.setText("Follow");
-
+                    followBtn.setText("Follow");
+                    user.Followed = true;
                 }
             }
         });
